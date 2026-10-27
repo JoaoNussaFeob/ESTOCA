@@ -1,0 +1,24 @@
+DEFINE
+    MEASURE 'Pedidos'[Refeicoes previstas] = SUM(Pedidos[quantidade])
+    MEASURE 'Pedidos'[Receita prevista] = DIVIDE(SUM(Pedidos[valor_previsto_centavos]), 100, 0)
+    MEASURE 'Pedidos'[Media diaria] = DIVIDE([Refeicoes previstas], DISTINCTCOUNT(Calendario[data]), 0)
+    MEASURE 'Produtos'[Produtos cadastrados] = COUNTROWS(Produtos)
+    MEASURE 'Consumo'[Consumo previsto kg] = DIVIDE(CALCULATE(SUM(Consumo[quantidade_base]), KEEPFILTERS(Produtos[unidade] = "g")), 1000, 0)
+    MEASURE 'Recebimentos'[Compras previstas kg] = DIVIDE(CALCULATE(SUM(Recebimentos[quantidade_base]), KEEPFILTERS(Produtos[unidade] = "g")), 1000, 0)
+    MEASURE 'Movimentos'[Saldo atual kg] = DIVIDE(CALCULATE(SUM(Movimentos[delta]), REMOVEFILTERS(Calendario), KEEPFILTERS(Produtos[unidade] = "g")), 1000, 0)
+    MEASURE 'Movimentos'[Saidas registradas kg] = DIVIDE(-COALESCE(CALCULATE(SUM(Movimentos[delta]), Movimentos[tipo] = "SAIDA", KEEPFILTERS(Produtos[unidade] = "g")), 0), 1000, 0)
+    MEASURE 'Demanda'[Delivery previsto] = SUM(Demanda[delivery])
+    MEASURE 'VendasExemplo'[Receita exemplo] = DIVIDE(SUM(VendasExemplo[valor_centavos]), 100, 0)
+EVALUATE
+ROW(
+    "Refeicoes previstas", [Refeicoes previstas],
+    "Receita prevista", [Receita prevista],
+    "Media diaria", [Media diaria],
+    "Produtos cadastrados", [Produtos cadastrados],
+    "Consumo previsto kg", [Consumo previsto kg],
+    "Compras previstas kg", [Compras previstas kg],
+    "Saldo atual kg", [Saldo atual kg],
+    "Saidas registradas kg", [Saidas registradas kg],
+    "Delivery previsto", [Delivery previsto],
+    "Receita exemplo", [Receita exemplo]
+)

@@ -1,0 +1,4 @@
+{
+  "ArquivoExcel": "\"C:\\Estoca\\Base_Estoca.xlsx\" meta [IsParameterQuery=true, Type=\"Text\", IsParameterQueryRequired=true]",
+  "FonteExcel": "Excel.Workbook(File.Contents(ArquivoExcel), null, true)"
+}
