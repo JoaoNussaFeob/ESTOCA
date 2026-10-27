@@ -1,0 +1,10 @@
+{
+  "inicio": "2026-11-02",
+  "dias": 14,
+  "refeicoes_dia_util": 180,
+  "refeicoes_fim_semana": 240,
+  "fracao_fitness": 0.20,
+  "fracao_delivery": 0.65,
+  "margem_seguranca": 0.15,
+  "descricao": "Cenário acadêmico fictício. Datas, demanda, receitas, embalagens e ciclos de compra são hipóteses, não registros do restaurante."
+}

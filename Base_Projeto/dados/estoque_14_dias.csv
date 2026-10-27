@@ -1,0 +1,54 @@
+﻿produto;nome;categoria;unidade;consumo_14d;meta_global_15pct;estoque_inicial;reposicao_14d;total_compras;saldo_final;ciclo_dias;embalagem
+frango;Filé de peito de frango;Proteínas;g;351120;403788;202000;202000;404000;52880;7;1000
+tilapia;Filé de tilápia;Proteínas;g;52580;60467;34000;27000;61000;8420;7;1000
+peito_bovino;Ponta de peito bovina;Proteínas;g;48620;55913;26000;31000;57000;8380;7;1000
+bovino_assar;Carne bovina para assar;Proteínas;g;18980;21827;16000;7000;23000;4020;7;1000
+bovino_panela;Carne bovina para panela;Proteínas;g;32250;37088;13000;25000;38000;5750;7;1000
+carne_moida;Carne bovina moída;Proteínas;g;10200;11730;6000;6000;12000;1800;7;1000
+sobrecoxa;Sobrecoxa de frango com osso;Proteínas;g;32640;37536;19000;19000;38000;5360;7;1000
+bacon;Bacon;Proteínas;g;14004;16105;9000;8000;17000;2996;7;1000
+ovos;Ovos;Ovos e laticínios;un;1220;1403;720;720;1440;220;7;30
+queijo;Queijo muçarela;Ovos e laticínios;g;21700;24955;13000;13000;26000;4300;7;1000
+leite;Leite;Ovos e laticínios;ml;33000;37950;19000;19000;38000;5000;7;1000
+manteiga;Manteiga;Ovos e laticínios;g;6318;7266;3500;4000;7500;1182;7;500
+arroz;Arroz branco cru;Secos;g;132480;152352;155000;0;155000;22520;14;5000
+integral;Arroz integral cru;Secos;g;33120;38088;39000;0;39000;5880;14;1000
+feijao;Feijão carioca seco;Secos;g;88320;101568;102000;0;102000;13680;14;1000
+lasanha;Massa seca para lasanha;Secos;g;6120;7038;7500;0;7500;1380;14;500
+macarrao;Macarrão seco para macarronese;Secos;g;16800;19320;19500;0;19500;2700;14;500
+trigo;Farinha de trigo;Secos;g;22484;25857;26000;0;26000;3516;14;1000
+rosca;Farinha de rosca;Secos;g;27390;31499;32000;0;32000;4610;14;1000
+oleo;Óleo vegetal;Óleos e temperos;ml;74800;86020;86400;0;86400;11600;14;900
+azeite;Azeite;Óleos e temperos;ml;3300;3795;4000;0;4000;700;14;500
+sal;Sal;Óleos e temperos;g;12696;14601;15000;0;15000;2304;14;1000
+pimenta;Pimenta-do-reino;Óleos e temperos;g;2326;2675;2700;0;2700;374;14;100
+vinagre;Vinagre;Óleos e temperos;ml;1980;2277;3000;0;3000;1020;14;750
+molho;Molho de tomate;Conservas;g;19680;22632;23000;0;23000;3320;14;1000
+maionese;Maionese industrializada;Conservas;g;9600;11040;12000;0;12000;2400;14;1000
+milho;Milho verde drenado;Conservas;g;39840;45816;45900;0;45900;6060;14;170
+ervilha;Ervilha drenada;Conservas;g;9600;11040;11050;0;11050;1450;14;170
+palmito;Palmito drenado;Conservas;g;4680;5382;5400;0;5400;720;14;300
+azeitona;Azeitona sem caroço drenada;Conservas;g;540;621;1000;0;1000;460;14;500
+alface;Alface;Hortifruti;g;13800;15870;2500;15500;18000;4200;2;500
+rucula;Rúcula;Hortifruti;g;5520;6348;1000;6250;7250;1730;2;250
+couve;Couve;Hortifruti;g;16200;18630;4500;15500;20000;3800;2;500
+tomate;Tomate;Hortifruti;g;27600;31740;5000;31000;36000;8400;2;1000
+laranja;Laranja;Hortifruti;g;32400;37260;9000;31000;40000;7600;2;1000
+pepino;Pepino;Hortifruti;g;6240;7176;2000;7000;9000;2760;2;1000
+cabotia;Abóbora cabotiá inteira;Hortifruti;g;16800;19320;5000;17000;22000;5200;2;1000
+batata_doce;Batata-doce;Hortifruti;g;62400;71760;17000;57000;74000;11600;2;1000
+batata;Batata inglesa;Hortifruti;g;67200;77280;17000;63000;80000;12800;2;1000
+cenoura;Cenoura;Hortifruti;g;34320;39468;5000;36000;41000;6680;2;1000
+brocolis;Brócolis;Hortifruti;g;65040;74796;6000;70000;76000;10960;2;1000
+abobrinha;Abobrinha;Hortifruti;g;58800;67620;5000;67000;72000;13200;2;1000
+repolho;Repolho;Hortifruti;g;43200;49680;0;51000;51000;7800;2;1000
+beterraba;Beterraba;Hortifruti;g;3240;3726;0;6000;6000;2760;2;1000
+berinjela;Berinjela;Hortifruti;g;4320;4968;0;6000;6000;1680;2;1000
+pimentao;Pimentão;Hortifruti;g;7320;8418;2000;10000;12000;4680;2;1000
+cebola;Cebola;Hortifruti;g;33913;39000;6000;37000;43000;9087;2;1000
+alho;Alho descascado;Hortifruti;g;15284;17577;2500;17000;19500;4216;2;500
+limao;Limão;Hortifruti;g;21635;24881;3000;24000;27000;5365;2;1000
+cheiro;Cheiro-verde;Hortifruti;g;996;1146;200;1300;1500;504;2;100
+marmita;Conjunto marmita com tampa;Embalagens;un;1794;2064;2100;0;2100;306;14;100
+sacola;Sacola para entrega;Embalagens;un;1794;2064;2100;0;2100;306;14;100
+talher;Kit de talheres e guardanapo;Embalagens;un;1794;2064;2100;0;2100;306;14;100

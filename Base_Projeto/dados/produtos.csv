@@ -1,0 +1,54 @@
+﻿codigo;nome;categoria;unidade;embalagem;ciclo_dias;origem
+frango;Filé de peito de frango;Proteínas;g;1000;7;Citado
+tilapia;Filé de tilápia;Proteínas;g;1000;7;Citado
+peito_bovino;Ponta de peito bovina;Proteínas;g;1000;7;Citado
+bovino_assar;Carne bovina para assar;Proteínas;g;1000;7;"Citado; corte presumido"
+bovino_panela;Carne bovina para panela;Proteínas;g;1000;7;"Citado; corte presumido"
+carne_moida;Carne bovina moída;Proteínas;g;1000;7;Inferido da bolonhesa
+sobrecoxa;Sobrecoxa de frango com osso;Proteínas;g;1000;7;"Citado; com osso presumido"
+bacon;Bacon;Proteínas;g;1000;7;Citado
+ovos;Ovos;Ovos e laticínios;un;30;7;Inferido da omelete e empanados
+queijo;Queijo muçarela;Ovos e laticínios;g;1000;7;"Queijo citado; tipo presumido"
+leite;Leite;Ovos e laticínios;ml;1000;7;Inferido do creme e molho
+manteiga;Manteiga;Ovos e laticínios;g;500;7;Citado
+arroz;Arroz branco cru;Secos;g;5000;14;Citado
+integral;Arroz integral cru;Secos;g;1000;14;Citado
+feijao;Feijão carioca seco;Secos;g;1000;14;"Feijão citado; tipo presumido"
+lasanha;Massa seca para lasanha;Secos;g;500;14;Inferido da lasanha
+macarrao;Macarrão seco para macarronese;Secos;g;500;14;Inferido da macarronese
+trigo;Farinha de trigo;Secos;g;1000;14;Inferido
+rosca;Farinha de rosca;Secos;g;1000;14;Inferido dos empanados
+oleo;Óleo vegetal;Óleos e temperos;ml;900;14;Inferido
+azeite;Azeite;Óleos e temperos;ml;500;14;Inferido
+sal;Sal;Óleos e temperos;g;1000;14;Inferido
+pimenta;Pimenta-do-reino;Óleos e temperos;g;100;14;Inferido
+vinagre;Vinagre;Óleos e temperos;ml;750;14;Inferido
+molho;Molho de tomate;Conservas;g;1000;14;Inferido da bolonhesa
+maionese;Maionese industrializada;Conservas;g;1000;14;Inferido da macarronese
+milho;Milho verde drenado;Conservas;g;170;14;"Citado; embalagem em peso drenado"
+ervilha;Ervilha drenada;Conservas;g;170;14;"Citado; embalagem em peso drenado"
+palmito;Palmito drenado;Conservas;g;300;14;"Citado; embalagem em peso drenado"
+azeitona;Azeitona sem caroço drenada;Conservas;g;500;14;Inferido da caponata
+alface;Alface;Hortifruti;g;500;2;"Folhas citadas; tipo presumido"
+rucula;Rúcula;Hortifruti;g;250;2;"Folhas citadas; tipo presumido"
+couve;Couve;Hortifruti;g;500;2;Citado
+tomate;Tomate;Hortifruti;g;1000;2;Citado
+laranja;Laranja;Hortifruti;g;1000;2;Citado
+pepino;Pepino;Hortifruti;g;1000;2;Citado
+cabotia;Abóbora cabotiá inteira;Hortifruti;g;1000;2;Citado
+batata_doce;Batata-doce;Hortifruti;g;1000;2;Citado
+batata;Batata inglesa;Hortifruti;g;1000;2;Inferido da batata canoa
+cenoura;Cenoura;Hortifruti;g;1000;2;Citado
+brocolis;Brócolis;Hortifruti;g;1000;2;Citado
+abobrinha;Abobrinha;Hortifruti;g;1000;2;Citado
+repolho;Repolho;Hortifruti;g;1000;2;Citado
+beterraba;Beterraba;Hortifruti;g;1000;2;Citado
+berinjela;Berinjela;Hortifruti;g;1000;2;Citado
+pimentao;Pimentão;Hortifruti;g;1000;2;Inferido dos legumes e caponata
+cebola;Cebola;Hortifruti;g;1000;2;Inferido
+alho;Alho descascado;Hortifruti;g;500;2;Inferido
+limao;Limão;Hortifruti;g;1000;2;Inferido do tempero
+cheiro;Cheiro-verde;Hortifruti;g;100;2;Inferido
+marmita;Conjunto marmita com tampa;Embalagens;un;100;14;"Inferido; modelo universal fictício"
+sacola;Sacola para entrega;Embalagens;un;100;14;"Inferido; uma por refeição delivery"
+talher;Kit de talheres e guardanapo;Embalagens;un;100;14;"Inferido; um por refeição delivery"

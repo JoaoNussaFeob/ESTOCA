@@ -1,0 +1,21 @@
+﻿codigo;nome;tipo
+frango_g;Filé de frango grelhado;Principal
+frango_e;Filé de frango empanado;Principal
+tilapia_g;Filé de tilápia grelhado;Principal
+tilapia_e;Iscas de tilápia empanadas;Principal
+omelete;Omelete com queijo;Principal
+peito;Ponta de peito na pressão;Principal
+assado;Carne bovina assada;Principal
+panela;Carne de panela;Principal
+lasanha;Lasanha à bolonhesa;Principal
+sobrecoxa;Sobrecoxa assada com bacon;Principal
+trad_base;Arroz branco e feijão;Base
+trad_A;Batata-doce e legumes na manteiga;Acompanhamento
+trad_B;Batata canoa e creme de milho;Acompanhamento
+trad_C;Brócolis com bacon e macarronese;Acompanhamento
+trad_D;Abobrinha empanada e repolho com bacon;Acompanhamento
+fit_base;Arroz integral, folhas e tomate;Base
+fit_A;Couve, palmito, laranja e pepino;Acompanhamento
+fit_B;Couve, cabotiá e laranja;Acompanhamento
+fit_C;Milho e ervilha;Acompanhamento
+fit_D;Repolho, cenoura, beterraba e caponata;Acompanhamento
