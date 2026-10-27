@@ -1,0 +1,5 @@
+{
+  "arquivos_report_validados": 29,
+  "referencias_de_colunas_e_medidas": "válidas",
+  "limite": "Validação de esquema JSON e referências. Não executa Power BI Desktop, motor M ou DAX e não comprova compatibilidade com o Desktop 2.138."
+}

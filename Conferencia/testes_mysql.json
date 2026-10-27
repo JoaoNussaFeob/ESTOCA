@@ -1,0 +1,20 @@
+{
+  "motor": "8.0.36-2ubuntu3",
+  "resultado": "aprovado",
+  "verificacoes": [
+    "DDL completo e carga executados em MySQL 8.0.36-2ubuntu3",
+    "Contagens de todas as tabelas de domínio conciliadas",
+    "53 saldos reconciliados com o histórico",
+    "2760 refeições confirmadas na visão SQL",
+    "Todas as consultas de extração executadas",
+    "Bloqueio confirmado: saldo negativo",
+    "Bloqueio confirmado: FK inexistente",
+    "Bloqueio confirmado: delta zero",
+    "Bloqueio confirmado: exclusão de histórico",
+    "Bloqueio confirmado: edição de histórico",
+    "Bloqueio confirmado: abertura repetida",
+    "Bloqueio confirmado: receita duplicada",
+    "Entrada e saída atualizam saldo em transação",
+    "Reconciliação preservada após operações"
+  ]
+}

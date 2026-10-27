@@ -1,0 +1,6 @@
+{
+  "parser": "@microsoft/powerquery-parser 4.0.1",
+  "expressoes_verificadas": 37,
+  "resultado": "Sintaxe aprovada",
+  "limite": "Não executa fontes nem comprova os resultados do motor Power Query."
+}

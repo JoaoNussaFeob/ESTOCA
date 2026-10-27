@@ -1,0 +1,33 @@
+{
+  "arquivos_por_extensao": {
+    ".py": 5,
+    ".md": 5,
+    "": 1,
+    ".json": 42,
+    ".txt": 10,
+    ".pdf": 8,
+    ".png": 7,
+    ".xlsx": 3,
+    ".dart": 4,
+    ".sql": 5,
+    ".dax": 2,
+    ".pbip": 3,
+    ".m": 30,
+    ".pbism": 3,
+    ".bim": 3,
+    ".pbir": 3,
+    ".csv": 10,
+    ".sqlite": 1
+  },
+  "comentarios_em_codigo": 0,
+  "docstrings_python": 0,
+  "configurador_de_caminhos": "testado em cópia",
+  "pbix_presentes": 2,
+  "pendencias": [
+    "Finalização PBIX 06",
+    "Publicação GitHub"
+  ],
+  "integrantes": "Quatro integrantes identificados na ordem solicitada; capas conferidas.",
+  "entrega_10": "PBIX visual revisado recebido; integridade e oito visuais conferidos; execução local pelo usuário.",
+  "entrega_03": "PBIX recebido; DataModel e integridade conferidos; captura do usuário demonstra tabela renderizada."
+}

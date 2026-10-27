@@ -1,0 +1,12 @@
+{
+  "dart": "3.9.4",
+  "analise_estatica": "No issues found",
+  "verificacoes": 30,
+  "resultado": "aprovado",
+  "arquivos": [
+    "Entrega_05/classes_e_objetos.dart",
+    "Entrega_08/repeticao_e_colecoes.dart",
+    "Entrega_09/encapsulamento_e_validacao.dart",
+    "Conferencia/testes_dart.dart"
+  ]
+}
