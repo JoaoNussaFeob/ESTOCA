@@ -1,0 +1,755 @@
+{
+  "name": "Estoca",
+  "compatibilityLevel": 1550,
+  "model": {
+    "culture": "pt-BR",
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "sourceQueryCulture": "pt-BR",
+    "tables": [
+      {
+        "name": "Produtos",
+        "columns": [
+          {
+            "name": "codigo",
+            "dataType": "string",
+            "sourceColumn": "codigo",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "nome",
+            "dataType": "string",
+            "sourceColumn": "nome",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "categoria",
+            "dataType": "string",
+            "sourceColumn": "categoria",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "unidade",
+            "dataType": "string",
+            "sourceColumn": "unidade",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "embalagem",
+            "dataType": "int64",
+            "sourceColumn": "embalagem",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ciclo_dias",
+            "dataType": "int64",
+            "sourceColumn": "ciclo_dias",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "origem",
+            "dataType": "string",
+            "sourceColumn": "origem",
+            "summarizeBy": "none"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Produtos",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Fonte = FonteExcel{[Item=\"tb_Produtos\", Kind=\"Table\"]}[Data],",
+                "    Colunas = Table.SelectColumns(Fonte, {\"codigo\", \"nome\", \"categoria\", \"unidade\", \"embalagem\", \"ciclo_dias\", \"origem\"}),",
+                "    Tipos = Table.TransformColumnTypes(Colunas, {{\"codigo\", type text}, {\"nome\", type text}, {\"categoria\", type text}, {\"unidade\", type text}, {\"embalagem\", Int64.Type}, {\"ciclo_dias\", Int64.Type}, {\"origem\", type text}}, \"pt-BR\"),",
+                "    Textos = Table.TransformColumns(Tipos, {{\"codigo\", each if _ = null then null else Text.Trim(_), type text}, {\"nome\", each if _ = null then null else Text.Trim(_), type text}, {\"categoria\", each if _ = null then null else Text.Trim(_), type text}, {\"unidade\", each if _ = null then null else Text.Trim(_), type text}, {\"origem\", each if _ = null then null else Text.Trim(_), type text}}),",
+                "    Unidades = Table.TransformColumns(Textos, {{\"unidade\", Text.Lower, type text}}),",
+                "    Origem = Table.ReplaceValue(Unidades, null, \"Não informado\", Replacer.ReplaceValue, {\"origem\"}),",
+                "    SemDuplicatas = Table.Distinct(Origem),",
+                "    ChavesValidas = if Table.RowCount(Table.SelectRows(SemDuplicatas, each [codigo] = null or [codigo] = \"\")) > 0 then error \"Chave obrigatória ausente\" else SemDuplicatas,",
+                "    Unicidade = if Table.RowCount(Table.Distinct(ChavesValidas, {\"codigo\"})) <> Table.RowCount(ChavesValidas) then error \"Chaves duplicadas conflitantes\" else ChavesValidas,",
+                "    Resultado = Unicidade",
+                "in",
+                "    Resultado"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Receitas",
+        "columns": [
+          {
+            "name": "codigo",
+            "dataType": "string",
+            "sourceColumn": "codigo",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "nome",
+            "dataType": "string",
+            "sourceColumn": "nome",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "tipo",
+            "dataType": "string",
+            "sourceColumn": "tipo",
+            "summarizeBy": "none"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Receitas",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Fonte = FonteExcel{[Item=\"tb_Receitas\", Kind=\"Table\"]}[Data],",
+                "    Colunas = Table.SelectColumns(Fonte, {\"codigo\", \"nome\", \"tipo\"}),",
+                "    Tipos = Table.TransformColumnTypes(Colunas, {{\"codigo\", type text}, {\"nome\", type text}, {\"tipo\", type text}}, \"pt-BR\"),",
+                "    Textos = Table.TransformColumns(Tipos, {{\"codigo\", each if _ = null then null else Text.Trim(_), type text}, {\"nome\", each if _ = null then null else Text.Trim(_), type text}, {\"tipo\", each if _ = null then null else Text.Trim(_), type text}}),",
+                "    SemDuplicatas = Table.Distinct(Textos),",
+                "    ChavesValidas = if Table.RowCount(Table.SelectRows(SemDuplicatas, each [codigo] = null or [codigo] = \"\")) > 0 then error \"Chave obrigatória ausente\" else SemDuplicatas,",
+                "    Unicidade = if Table.RowCount(Table.Distinct(ChavesValidas, {\"codigo\"})) <> Table.RowCount(ChavesValidas) then error \"Chaves duplicadas conflitantes\" else ChavesValidas,",
+                "    Resultado = Unicidade",
+                "in",
+                "    Resultado"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Ingredientes",
+        "columns": [
+          {
+            "name": "receita",
+            "dataType": "string",
+            "sourceColumn": "receita",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "produto",
+            "dataType": "string",
+            "sourceColumn": "produto",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "quantidade_base_por_M",
+            "dataType": "double",
+            "sourceColumn": "quantidade_base_por_M",
+            "summarizeBy": "none"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Ingredientes",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Fonte = FonteExcel{[Item=\"tb_Ingredientes\", Kind=\"Table\"]}[Data],",
+                "    Colunas = Table.SelectColumns(Fonte, {\"receita\", \"produto\", \"quantidade_base_por_M\"}),",
+                "    Tipos = Table.TransformColumnTypes(Colunas, {{\"receita\", type text}, {\"produto\", type text}, {\"quantidade_base_por_M\", type number}}, \"pt-BR\"),",
+                "    Textos = Table.TransformColumns(Tipos, {{\"receita\", each if _ = null then null else Text.Trim(_), type text}, {\"produto\", each if _ = null then null else Text.Trim(_), type text}}),",
+                "    SemDuplicatas = Table.Distinct(Textos),",
+                "    ChavesValidas = if Table.RowCount(Table.SelectRows(SemDuplicatas, each [receita] = null or [receita] = \"\" or [produto] = null or [produto] = \"\")) > 0 then error \"Chave obrigatória ausente\" else SemDuplicatas,",
+                "    Unicidade = if Table.RowCount(Table.Distinct(ChavesValidas, {\"receita\", \"produto\"})) <> Table.RowCount(ChavesValidas) then error \"Chaves duplicadas conflitantes\" else ChavesValidas,",
+                "    Resultado = Unicidade",
+                "in",
+                "    Resultado"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Demanda",
+        "columns": [
+          {
+            "name": "data",
+            "dataType": "dateTime",
+            "sourceColumn": "data",
+            "summarizeBy": "none",
+            "formatString": "dd/MM/yyyy"
+          },
+          {
+            "name": "dia",
+            "dataType": "int64",
+            "sourceColumn": "dia",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "total",
+            "dataType": "int64",
+            "sourceColumn": "total",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "tradicional",
+            "dataType": "int64",
+            "sourceColumn": "tradicional",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "fitness",
+            "dataType": "int64",
+            "sourceColumn": "fitness",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "delivery",
+            "dataType": "int64",
+            "sourceColumn": "delivery",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "variante",
+            "dataType": "string",
+            "sourceColumn": "variante",
+            "summarizeBy": "none"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Demanda",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Fonte = FonteExcel{[Item=\"tb_Demanda\", Kind=\"Table\"]}[Data],",
+                "    Colunas = Table.SelectColumns(Fonte, {\"data\", \"dia\", \"total\", \"tradicional\", \"fitness\", \"delivery\", \"variante\"}),",
+                "    Tipos = Table.TransformColumnTypes(Colunas, {{\"data\", type date}, {\"dia\", Int64.Type}, {\"total\", Int64.Type}, {\"tradicional\", Int64.Type}, {\"fitness\", Int64.Type}, {\"delivery\", Int64.Type}, {\"variante\", type text}}, \"pt-BR\"),",
+                "    Textos = Table.TransformColumns(Tipos, {{\"variante\", each if _ = null then null else Text.Trim(_), type text}}),",
+                "    SemDuplicatas = Table.Distinct(Textos),",
+                "    ChavesValidas = if Table.RowCount(Table.SelectRows(SemDuplicatas, each [data] = null)) > 0 then error \"Chave obrigatória ausente\" else SemDuplicatas,",
+                "    Unicidade = if Table.RowCount(Table.Distinct(ChavesValidas, {\"data\"})) <> Table.RowCount(ChavesValidas) then error \"Chaves duplicadas conflitantes\" else ChavesValidas,",
+                "    Resultado = Unicidade",
+                "in",
+                "    Resultado"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Pedidos",
+        "columns": [
+          {
+            "name": "id",
+            "dataType": "int64",
+            "sourceColumn": "id",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "data",
+            "dataType": "dateTime",
+            "sourceColumn": "data",
+            "summarizeBy": "none",
+            "formatString": "dd/MM/yyyy"
+          },
+          {
+            "name": "linha",
+            "dataType": "string",
+            "sourceColumn": "linha",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "principal",
+            "dataType": "string",
+            "sourceColumn": "principal",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "tamanho",
+            "dataType": "string",
+            "sourceColumn": "tamanho",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "quantidade",
+            "dataType": "int64",
+            "sourceColumn": "quantidade",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "variante",
+            "dataType": "string",
+            "sourceColumn": "variante",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "preco_unitario_centavos",
+            "dataType": "int64",
+            "sourceColumn": "preco_unitario_centavos",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "valor_previsto_centavos",
+            "dataType": "int64",
+            "sourceColumn": "valor_previsto_centavos",
+            "summarizeBy": "none"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Pedidos",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Fonte = FonteExcel{[Item=\"tb_Pedidos\", Kind=\"Table\"]}[Data],",
+                "    Colunas = Table.SelectColumns(Fonte, {\"id\", \"data\", \"linha\", \"principal\", \"tamanho\", \"quantidade\", \"variante\"}),",
+                "    Tipos = Table.TransformColumnTypes(Colunas, {{\"id\", Int64.Type}, {\"data\", type date}, {\"linha\", type text}, {\"principal\", type text}, {\"tamanho\", type text}, {\"quantidade\", Int64.Type}, {\"variante\", type text}}, \"pt-BR\"),",
+                "    Textos = Table.TransformColumns(Tipos, {{\"linha\", each if _ = null then null else Text.Trim(_), type text}, {\"principal\", each if _ = null then null else Text.Trim(_), type text}, {\"tamanho\", each if _ = null then null else Text.Trim(_), type text}, {\"variante\", each if _ = null then null else Text.Trim(_), type text}}),",
+                "    SemDuplicatas = Table.Distinct(Textos),",
+                "    ChavesValidas = if Table.RowCount(Table.SelectRows(SemDuplicatas, each [id] = null)) > 0 then error \"Chave obrigatória ausente\" else SemDuplicatas,",
+                "    Unicidade = if Table.RowCount(Table.Distinct(ChavesValidas, {\"id\"})) <> Table.RowCount(ChavesValidas) then error \"Chaves duplicadas conflitantes\" else ChavesValidas,",
+                "    Preco = Table.AddColumn(Unicidade, \"preco_unitario_centavos\", each if [linha] = \"fit\" then (if [principal] = \"tilapia_g\" then 2700 else 2200) else if [tamanho] = \"P\" then 2200 else if [tamanho] = \"M\" then 2400 else 2700, Int64.Type),",
+                "    Valor = Table.AddColumn(Preco, \"valor_previsto_centavos\", each [quantidade] * [preco_unitario_centavos], Int64.Type),",
+                "    Resultado = Valor",
+                "in",
+                "    Resultado"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Consumo",
+        "columns": [
+          {
+            "name": "data",
+            "dataType": "dateTime",
+            "sourceColumn": "data",
+            "summarizeBy": "none",
+            "formatString": "dd/MM/yyyy"
+          },
+          {
+            "name": "dia",
+            "dataType": "int64",
+            "sourceColumn": "dia",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "produto",
+            "dataType": "string",
+            "sourceColumn": "produto",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "quantidade_base",
+            "dataType": "int64",
+            "sourceColumn": "quantidade_base",
+            "summarizeBy": "none"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Consumo",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Fonte = FonteExcel{[Item=\"tb_Consumo\", Kind=\"Table\"]}[Data],",
+                "    Colunas = Table.SelectColumns(Fonte, {\"data\", \"dia\", \"produto\", \"quantidade_base\"}),",
+                "    Tipos = Table.TransformColumnTypes(Colunas, {{\"data\", type date}, {\"dia\", Int64.Type}, {\"produto\", type text}, {\"quantidade_base\", Int64.Type}}, \"pt-BR\"),",
+                "    Textos = Table.TransformColumns(Tipos, {{\"produto\", each if _ = null then null else Text.Trim(_), type text}}),",
+                "    SemDuplicatas = Table.Distinct(Textos),",
+                "    ChavesValidas = if Table.RowCount(Table.SelectRows(SemDuplicatas, each [data] = null or [produto] = null or [produto] = \"\")) > 0 then error \"Chave obrigatória ausente\" else SemDuplicatas,",
+                "    Unicidade = if Table.RowCount(Table.Distinct(ChavesValidas, {\"data\", \"produto\"})) <> Table.RowCount(ChavesValidas) then error \"Chaves duplicadas conflitantes\" else ChavesValidas,",
+                "    Resultado = Unicidade",
+                "in",
+                "    Resultado"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Recebimentos",
+        "columns": [
+          {
+            "name": "id",
+            "dataType": "int64",
+            "sourceColumn": "id",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "data",
+            "dataType": "dateTime",
+            "sourceColumn": "data",
+            "summarizeBy": "none",
+            "formatString": "dd/MM/yyyy"
+          },
+          {
+            "name": "dia",
+            "dataType": "int64",
+            "sourceColumn": "dia",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "produto",
+            "dataType": "string",
+            "sourceColumn": "produto",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "quantidade_base",
+            "dataType": "int64",
+            "sourceColumn": "quantidade_base",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "pacotes",
+            "dataType": "int64",
+            "sourceColumn": "pacotes",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "estado",
+            "dataType": "string",
+            "sourceColumn": "estado",
+            "summarizeBy": "none"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Recebimentos",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Fonte = FonteExcel{[Item=\"tb_Recebimentos\", Kind=\"Table\"]}[Data],",
+                "    Colunas = Table.SelectColumns(Fonte, {\"id\", \"data\", \"dia\", \"produto\", \"quantidade_base\", \"pacotes\", \"estado\"}),",
+                "    Tipos = Table.TransformColumnTypes(Colunas, {{\"id\", Int64.Type}, {\"data\", type date}, {\"dia\", Int64.Type}, {\"produto\", type text}, {\"quantidade_base\", Int64.Type}, {\"pacotes\", Int64.Type}, {\"estado\", type text}}, \"pt-BR\"),",
+                "    Textos = Table.TransformColumns(Tipos, {{\"produto\", each if _ = null then null else Text.Trim(_), type text}, {\"estado\", each if _ = null then null else Text.Trim(_), type text}}),",
+                "    SemDuplicatas = Table.Distinct(Textos),",
+                "    ChavesValidas = if Table.RowCount(Table.SelectRows(SemDuplicatas, each [id] = null)) > 0 then error \"Chave obrigatória ausente\" else SemDuplicatas,",
+                "    Unicidade = if Table.RowCount(Table.Distinct(ChavesValidas, {\"id\"})) <> Table.RowCount(ChavesValidas) then error \"Chaves duplicadas conflitantes\" else ChavesValidas,",
+                "    Resultado = Unicidade",
+                "in",
+                "    Resultado"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Movimentos",
+        "columns": [
+          {
+            "name": "id",
+            "dataType": "int64",
+            "sourceColumn": "id",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "produto",
+            "dataType": "string",
+            "sourceColumn": "produto",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "tipo",
+            "dataType": "string",
+            "sourceColumn": "tipo",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "delta",
+            "dataType": "int64",
+            "sourceColumn": "delta",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "motivo",
+            "dataType": "string",
+            "sourceColumn": "motivo",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "criado_em",
+            "dataType": "dateTime",
+            "sourceColumn": "criado_em",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "data_movimento",
+            "dataType": "dateTime",
+            "sourceColumn": "data_movimento",
+            "summarizeBy": "none",
+            "formatString": "dd/MM/yyyy"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Movimentos",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Fonte = FonteExcel{[Item=\"tb_Movimentos\", Kind=\"Table\"]}[Data],",
+                "    Colunas = Table.SelectColumns(Fonte, {\"id\", \"produto\", \"tipo\", \"delta\", \"motivo\", \"criado_em\"}),",
+                "    Tipos = Table.TransformColumnTypes(Colunas, {{\"id\", Int64.Type}, {\"produto\", type text}, {\"tipo\", type text}, {\"delta\", Int64.Type}, {\"motivo\", type text}, {\"criado_em\", type datetime}}, \"pt-BR\"),",
+                "    Textos = Table.TransformColumns(Tipos, {{\"produto\", each if _ = null then null else Text.Trim(_), type text}, {\"tipo\", each if _ = null then null else Text.Trim(_), type text}, {\"motivo\", each if _ = null then null else Text.Trim(_), type text}}),",
+                "    SemDuplicatas = Table.Distinct(Textos),",
+                "    ChavesValidas = if Table.RowCount(Table.SelectRows(SemDuplicatas, each [id] = null)) > 0 then error \"Chave obrigatória ausente\" else SemDuplicatas,",
+                "    Unicidade = if Table.RowCount(Table.Distinct(ChavesValidas, {\"id\"})) <> Table.RowCount(ChavesValidas) then error \"Chaves duplicadas conflitantes\" else ChavesValidas,",
+                "    DataMovimento = Table.AddColumn(Unicidade, \"data_movimento\", each Date.From([criado_em]), type date),",
+                "    Resultado = DataMovimento",
+                "in",
+                "    Resultado"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Calendario",
+        "columns": [
+          {
+            "name": "data",
+            "dataType": "dateTime",
+            "sourceColumn": "data",
+            "summarizeBy": "none",
+            "formatString": "dd/MM/yyyy"
+          },
+          {
+            "name": "dia_semana",
+            "dataType": "int64",
+            "sourceColumn": "dia_semana",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "fim_semana",
+            "dataType": "int64",
+            "sourceColumn": "fim_semana",
+            "summarizeBy": "none"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Calendario",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Fonte = FonteExcel{[Item=\"tb_Calendario\", Kind=\"Table\"]}[Data],",
+                "    Colunas = Table.SelectColumns(Fonte, {\"data\", \"dia_semana\", \"fim_semana\"}),",
+                "    Tipos = Table.TransformColumnTypes(Colunas, {{\"data\", type date}, {\"dia_semana\", Int64.Type}, {\"fim_semana\", Int64.Type}}, \"pt-BR\"),",
+                "    SemDuplicatas = Table.Distinct(Tipos),",
+                "    ChavesValidas = if Table.RowCount(Table.SelectRows(SemDuplicatas, each [data] = null)) > 0 then error \"Chave obrigatória ausente\" else SemDuplicatas,",
+                "    Unicidade = if Table.RowCount(Table.Distinct(ChavesValidas, {\"data\"})) <> Table.RowCount(ChavesValidas) then error \"Chaves duplicadas conflitantes\" else ChavesValidas,",
+                "    Resultado = Unicidade",
+                "in",
+                "    Resultado"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "VendasExemplo",
+        "columns": [
+          {
+            "name": "id",
+            "dataType": "int64",
+            "sourceColumn": "id",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "data",
+            "dataType": "dateTime",
+            "sourceColumn": "data",
+            "summarizeBy": "none",
+            "formatString": "dd/MM/yyyy"
+          },
+          {
+            "name": "valor_centavos",
+            "dataType": "int64",
+            "sourceColumn": "valor_centavos",
+            "summarizeBy": "none"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "VendasExemplo",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Fonte = FonteExcel{[Item=\"tb_VendasExemplo\", Kind=\"Table\"]}[Data],",
+                "    Colunas = Table.SelectColumns(Fonte, {\"id\", \"data\", \"valor_centavos\"}),",
+                "    Tipos = Table.TransformColumnTypes(Colunas, {{\"id\", Int64.Type}, {\"data\", type date}, {\"valor_centavos\", Int64.Type}}, \"pt-BR\"),",
+                "    SemDuplicatas = Table.Distinct(Tipos),",
+                "    ChavesValidas = if Table.RowCount(Table.SelectRows(SemDuplicatas, each [id] = null)) > 0 then error \"Chave obrigatória ausente\" else SemDuplicatas,",
+                "    Unicidade = if Table.RowCount(Table.Distinct(ChavesValidas, {\"id\"})) <> Table.RowCount(ChavesValidas) then error \"Chaves duplicadas conflitantes\" else ChavesValidas,",
+                "    Resultado = Unicidade",
+                "in",
+                "    Resultado"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "name": "4d2b3ea9-23c1-5718-8dbd-4d925b698fdb",
+        "fromTable": "Ingredientes",
+        "fromColumn": "produto",
+        "fromCardinality": "many",
+        "toTable": "Produtos",
+        "toColumn": "codigo",
+        "toCardinality": "one",
+        "crossFilteringBehavior": "oneDirection",
+        "isActive": true
+      },
+      {
+        "name": "0c621b04-cde6-5f47-83f4-e51916415922",
+        "fromTable": "Consumo",
+        "fromColumn": "produto",
+        "fromCardinality": "many",
+        "toTable": "Produtos",
+        "toColumn": "codigo",
+        "toCardinality": "one",
+        "crossFilteringBehavior": "oneDirection",
+        "isActive": true
+      },
+      {
+        "name": "36248e0c-96a8-50a0-8cdb-d95db874d003",
+        "fromTable": "Recebimentos",
+        "fromColumn": "produto",
+        "fromCardinality": "many",
+        "toTable": "Produtos",
+        "toColumn": "codigo",
+        "toCardinality": "one",
+        "crossFilteringBehavior": "oneDirection",
+        "isActive": true
+      },
+      {
+        "name": "cd1aff27-4fff-5d52-92a7-f0d91fa65c14",
+        "fromTable": "Movimentos",
+        "fromColumn": "produto",
+        "fromCardinality": "many",
+        "toTable": "Produtos",
+        "toColumn": "codigo",
+        "toCardinality": "one",
+        "crossFilteringBehavior": "oneDirection",
+        "isActive": true
+      },
+      {
+        "name": "b1f31733-f837-5f4a-8741-3a3caa8bf609",
+        "fromTable": "Ingredientes",
+        "fromColumn": "receita",
+        "fromCardinality": "many",
+        "toTable": "Receitas",
+        "toColumn": "codigo",
+        "toCardinality": "one",
+        "crossFilteringBehavior": "oneDirection",
+        "isActive": true
+      },
+      {
+        "name": "10131340-0c9e-50a2-8934-aaeae958c0a2",
+        "fromTable": "Pedidos",
+        "fromColumn": "principal",
+        "fromCardinality": "many",
+        "toTable": "Receitas",
+        "toColumn": "codigo",
+        "toCardinality": "one",
+        "crossFilteringBehavior": "oneDirection",
+        "isActive": true
+      },
+      {
+        "name": "de739cae-2ceb-505e-9f9c-41ae133b5a8e",
+        "fromTable": "Demanda",
+        "fromColumn": "data",
+        "fromCardinality": "many",
+        "toTable": "Calendario",
+        "toColumn": "data",
+        "toCardinality": "one",
+        "crossFilteringBehavior": "oneDirection",
+        "isActive": true
+      },
+      {
+        "name": "12ee7ffc-4188-5d05-bfae-d662b7142a24",
+        "fromTable": "Pedidos",
+        "fromColumn": "data",
+        "fromCardinality": "many",
+        "toTable": "Calendario",
+        "toColumn": "data",
+        "toCardinality": "one",
+        "crossFilteringBehavior": "oneDirection",
+        "isActive": true
+      },
+      {
+        "name": "cc439eee-837b-58fc-a163-052a550d314c",
+        "fromTable": "Consumo",
+        "fromColumn": "data",
+        "fromCardinality": "many",
+        "toTable": "Calendario",
+        "toColumn": "data",
+        "toCardinality": "one",
+        "crossFilteringBehavior": "oneDirection",
+        "isActive": true
+      },
+      {
+        "name": "550c872f-5ee5-59e6-b11b-0a2b5ae3f050",
+        "fromTable": "Recebimentos",
+        "fromColumn": "data",
+        "fromCardinality": "many",
+        "toTable": "Calendario",
+        "toColumn": "data",
+        "toCardinality": "one",
+        "crossFilteringBehavior": "oneDirection",
+        "isActive": true
+      },
+      {
+        "name": "a98c7eab-d0c3-5511-8bf9-08d8817dc0cb",
+        "fromTable": "VendasExemplo",
+        "fromColumn": "data",
+        "fromCardinality": "many",
+        "toTable": "Calendario",
+        "toColumn": "data",
+        "toCardinality": "one",
+        "crossFilteringBehavior": "oneDirection",
+        "isActive": true
+      },
+      {
+        "name": "20848cb3-b92b-5922-be42-03ca288832e8",
+        "fromTable": "Movimentos",
+        "fromColumn": "data_movimento",
+        "fromCardinality": "many",
+        "toTable": "Calendario",
+        "toColumn": "data",
+        "toCardinality": "one",
+        "crossFilteringBehavior": "oneDirection",
+        "isActive": true
+      }
+    ],
+    "expressions": [
+      {
+        "name": "ArquivoExcel",
+        "kind": "m",
+        "expression": "\"C:\\Estoca\\Base_Estoca.xlsx\" meta [IsParameterQuery=true, Type=\"Text\", IsParameterQueryRequired=true]"
+      },
+      {
+        "name": "FonteExcel",
+        "kind": "m",
+        "expression": "Excel.Workbook(File.Contents(ArquivoExcel), null, true)"
+      }
+    ]
+  }
+}

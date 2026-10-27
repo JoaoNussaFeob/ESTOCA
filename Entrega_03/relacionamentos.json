@@ -1,0 +1,98 @@
+[
+  {
+    "fato": "Ingredientes",
+    "coluna_fato": "produto",
+    "dimensao": "Produtos",
+    "chave_dimensao": "codigo",
+    "cardinalidade": "N:1",
+    "filtro": "dimensão para fato"
+  },
+  {
+    "fato": "Consumo",
+    "coluna_fato": "produto",
+    "dimensao": "Produtos",
+    "chave_dimensao": "codigo",
+    "cardinalidade": "N:1",
+    "filtro": "dimensão para fato"
+  },
+  {
+    "fato": "Recebimentos",
+    "coluna_fato": "produto",
+    "dimensao": "Produtos",
+    "chave_dimensao": "codigo",
+    "cardinalidade": "N:1",
+    "filtro": "dimensão para fato"
+  },
+  {
+    "fato": "Movimentos",
+    "coluna_fato": "produto",
+    "dimensao": "Produtos",
+    "chave_dimensao": "codigo",
+    "cardinalidade": "N:1",
+    "filtro": "dimensão para fato"
+  },
+  {
+    "fato": "Ingredientes",
+    "coluna_fato": "receita",
+    "dimensao": "Receitas",
+    "chave_dimensao": "codigo",
+    "cardinalidade": "N:1",
+    "filtro": "dimensão para fato"
+  },
+  {
+    "fato": "Pedidos",
+    "coluna_fato": "principal",
+    "dimensao": "Receitas",
+    "chave_dimensao": "codigo",
+    "cardinalidade": "N:1",
+    "filtro": "dimensão para fato"
+  },
+  {
+    "fato": "Demanda",
+    "coluna_fato": "data",
+    "dimensao": "Calendario",
+    "chave_dimensao": "data",
+    "cardinalidade": "N:1",
+    "filtro": "dimensão para fato"
+  },
+  {
+    "fato": "Pedidos",
+    "coluna_fato": "data",
+    "dimensao": "Calendario",
+    "chave_dimensao": "data",
+    "cardinalidade": "N:1",
+    "filtro": "dimensão para fato"
+  },
+  {
+    "fato": "Consumo",
+    "coluna_fato": "data",
+    "dimensao": "Calendario",
+    "chave_dimensao": "data",
+    "cardinalidade": "N:1",
+    "filtro": "dimensão para fato"
+  },
+  {
+    "fato": "Recebimentos",
+    "coluna_fato": "data",
+    "dimensao": "Calendario",
+    "chave_dimensao": "data",
+    "cardinalidade": "N:1",
+    "filtro": "dimensão para fato"
+  },
+  {
+    "fato": "VendasExemplo",
+    "coluna_fato": "data",
+    "dimensao": "Calendario",
+    "chave_dimensao": "data",
+    "cardinalidade": "N:1",
+    "filtro": "dimensão para fato"
+  },
+  {
+    "fato": "Movimentos",
+    "coluna_fato": "data_movimento",
+    "dimensao": "Calendario",
+    "chave_dimensao": "data",
+    "cardinalidade": "N:1",
+    "filtro": "dimensão para fato"
+  }
+]
