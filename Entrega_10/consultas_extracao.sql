@@ -1,0 +1,11 @@
+USE estoca_jk;
+SELECT * FROM vw_produtos ORDER BY codigo;
+SELECT * FROM vw_demanda ORDER BY data;
+SELECT * FROM vw_pedidos ORDER BY data,id;
+SELECT * FROM vw_consumo ORDER BY data,produto;
+SELECT * FROM vw_recebimentos ORDER BY data,produto;
+SELECT * FROM vw_movimentos ORDER BY criado_em,id;
+SELECT * FROM vw_conferencia_saldo WHERE diferenca<>0;
+SELECT SUM(total) AS refeicoes_previstas FROM vw_demanda;
+SELECT p.unidade,SUM(c.quantidade_base) AS consumo_base FROM consumo_planejado c JOIN produto p ON p.codigo=c.produto GROUP BY p.unidade;
+SELECT p.codigo,p.nome,p.unidade,s.saldo FROM produto p JOIN saldo_produto s ON s.produto=p.codigo ORDER BY p.nome;

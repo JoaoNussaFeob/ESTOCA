@@ -1,0 +1,5 @@
+{
+  "ServidorMySQL": "\"localhost:3306\" meta [IsParameterQuery=true, Type=\"Text\", IsParameterQueryRequired=true]",
+  "BancoMySQL": "\"estoca_jk\" meta [IsParameterQuery=true, Type=\"Text\", IsParameterQueryRequired=true]",
+  "FonteMySQL": "MySQL.Database(ServidorMySQL, BancoMySQL, [ReturnSingleDatabase=true])"
+}

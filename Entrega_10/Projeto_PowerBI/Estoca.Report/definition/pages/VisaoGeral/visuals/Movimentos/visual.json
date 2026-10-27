@@ -1,0 +1,113 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
+  "name": "Movimentos",
+  "position": {
+    "x": 650,
+    "y": 500,
+    "z": 0,
+    "height": 310,
+    "width": 605,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Produtos"
+                    }
+                  },
+                  "Property": "nome"
+                }
+              },
+              "queryRef": "Produtos.nome",
+              "nativeQueryRef": "nome"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Movimentos"
+                    }
+                  },
+                  "Property": "Saldo atual kg"
+                }
+              },
+              "queryRef": "Movimentos.Saldo atual kg",
+              "nativeQueryRef": "Saldo atual kg"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Consumo"
+                    }
+                  },
+                  "Property": "Consumo previsto kg"
+                }
+              },
+              "queryRef": "Consumo.Consumo previsto kg",
+              "nativeQueryRef": "Consumo previsto kg"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Massa por produto - kg (0 para outras unidades)'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "14D"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#17324D'"
+                    }
+                  }
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "objects": {}
+  }
+}
